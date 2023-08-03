@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../components/layout/Layout';
 import { toast } from 'react-toastify';
+import '../../style/AuthStyle.css'
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +22,8 @@ const Register = () => {
                 name, email, password, address, phone
             });
             if (res && res.data.success) {
-                toast.success(res.data && res.data.message)
                 navigate('/login')
+                toast.success(res.data && res.data.message)
             } else {
                 toast.error(res.data.message)
             }
@@ -33,9 +34,9 @@ const Register = () => {
     }
     return (
         <Layout title={"Sign Up - Ecommerce App"}>
-            <div className='register'>
-                <h1>Register</h1>
+            <div className='form-container'>
                 <form onSubmit={handleSumbit}>
+                    <h4 className='title'>REGISTER FORM</h4>
                     <div className="mb-3">
                         <input type="name" className="form-control" required value={name} onChange={(e) => setName(e.target.value)} id="exampleInputName" placeholder='Enter your Name' aria-describedby="emailHelp" />
                     </div>
@@ -51,7 +52,7 @@ const Register = () => {
                     <div className="mb-3">
                         <input type="address" className="form-control" required value={address} onChange={(e) => setAddress(e.target.value)} id="exampleInputAdress" placeholder='Enter your Address' />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Sign Up</button>
                 </form>
             </div>
         </Layout>
