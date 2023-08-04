@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import Layout from '../../components/layout/Layout';
-import { toast } from 'react-toastify';
-import '../../style/AuthStyle.css'
-
+import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import '../../style/AuthStyle.css'
 const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
+    const [answer, setAnswer] = useState('')
     const navigate = useNavigate()
 
     //function submit
@@ -19,7 +18,7 @@ const Register = () => {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:4000/api/v1/auth/register', {
-                name, email, password, address, phone
+                name, email, password, address, phone, answer
             });
             if (res && res.data.success) {
                 navigate('/login')
@@ -51,6 +50,9 @@ const Register = () => {
                     </div>
                     <div className="mb-3">
                         <input type="address" className="form-control" required value={address} onChange={(e) => setAddress(e.target.value)} id="exampleInputAdress" placeholder='Enter your Address' />
+                    </div>
+                    <div className="mb-3">
+                        <input type="text" className="form-control" required value={answer} onChange={(e) => setAnswer(e.target.value)} id="exampleInputAnswer" placeholder='Enter your favorite color' />
                     </div>
                     <button type="submit" className="btn btn-primary">Sign Up</button>
                 </form>
