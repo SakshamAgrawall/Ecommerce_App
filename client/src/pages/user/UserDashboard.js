@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/layout/Layout';
 
-const Dashboard = () => {
+const UserDashboard = () => {
     return (
         <Layout title={'Dashboard-Ecommerce App'}>
             <h1>Dashboard</h1>
@@ -9,4 +9,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default UserDashboard;

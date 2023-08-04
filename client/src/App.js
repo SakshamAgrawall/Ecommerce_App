@@ -7,8 +7,8 @@ import PageNotFound from './pages/PageNotFound';
 import Contact from './pages/Contact';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
-import Dashboard from './pages/user/Dashboard';
-import PrivateRoute from './components/Routes/Private';
+import UserDashboard from './pages/user/UserDashboard';
+import UserRoute from './components/Routes/UserRoute';
 import ForgotPassword from './pages/auth/ForgotPassword';
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/dashboard' element={<PrivateRoute />} >
-          <Route path='' element={<Dashboard />} />
+        <Route path='/dashboard' element={<UserRoute />} >
+          <Route path='' element={<UserDashboard />} />
         </Route>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />

@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     const handleSumbit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:4000/api/v1/auth/forgot-password', {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/forgot-password`, {
                 email, newPassword, answer
             });
             if (res && res.data.success) {
