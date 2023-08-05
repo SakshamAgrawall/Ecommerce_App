@@ -10,6 +10,8 @@ import Login from './pages/auth/Login';
 import UserDashboard from './pages/user/UserDashboard';
 import UserRoute from './components/Routes/UserRoute';
 import ForgotPassword from './pages/auth/ForgotPassword';
+import AdminRoute from './components/Routes/AdminRoute';
+import AdminDashboard from './pages/admin/AdminDeshboard';
 
 function App() {
   return (
@@ -17,7 +19,10 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/dashboard' element={<UserRoute />} >
-          <Route path='' element={<UserDashboard />} />
+          <Route path='user' element={<UserDashboard />} />
+        </Route>
+        <Route path='/dashboard' element={<AdminRoute />} >
+          <Route path='admin' element={<AdminDashboard />} />
         </Route>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
