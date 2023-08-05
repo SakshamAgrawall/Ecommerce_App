@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function UserRoute() {
     const [ok, setOk] = useState(false)
-    const [auth, setAuth] = useAuth()
+    const [auth] = useAuth()
 
     useEffect(() => {
         const authCheck = async () => {
