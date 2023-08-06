@@ -2,10 +2,11 @@
 # Full Stack Project - Ecommerce_App
 
 This is an MERN STACK Ecommerce Web Application that allows users to buy product, product are categoriesed so user can easily find product or there also a search bar for find product and diffrent filter options for getting the product.
-## Deployment
-
-Click on the link to visit Ecommerce WebApp<br/>
-.
+### Click on the link to visit Ecommerce WebApp<br/>
+#### backend is hosted on render web services
+- https://ecommerce-backend-04sc.onrender.com
+#### frontend is hosted on netlify web services
+-
 
 ## Framework /Dependencies
 
@@ -21,6 +22,7 @@ Click on the link to visit Ecommerce WebApp<br/>
 - Nodejs
 - express
 - becrypt
+- mongoose
 - npm packeges
 
 ### tools / hosting sites
