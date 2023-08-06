@@ -24,10 +24,11 @@ Click on the link to visit Ecommerce WebApp<br/>
 - npm packeges
 
 ### tools / hosting sites
-- github
+- git/github
 - vscode
 - Render
 - netlify
+- Postman
 
 
 ## **How To Run Locally**
