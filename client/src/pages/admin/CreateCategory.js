@@ -21,11 +21,11 @@ const CreateCategory = () => {
         try {
             const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/category/create-category`, { name })
             if (data?.success) {
-                toast.success(`${data.category.name} is created`)
+                toast.success(`${data?.category.name} is created`)
                 getAllCategory()
                 setName('')
             } else {
-                toast.error(data.category.message)
+                toast.error(data?.category?.message)
             }
         } catch (error) {
             toast.error('something went wrong')
@@ -36,30 +36,29 @@ const CreateCategory = () => {
         e.preventDefault()
         try {
             const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/category/update-category/${selected._id}`, { name: updateName })
-            if (data?.success) {
-                toast.success(`${data.category.name} is updated`)
+            if (data.success) {
+                toast.success(`${updateName} is updated`)
                 setSelected(null)
                 setUpdateName("")
                 setVisible(false)
                 getAllCategory()
             } else {
-                toast.error(data.category.message)
+                toast.error(data.message)
             }
         } catch (error) {
             toast.error('something went wrong')
         }
     }
 
-    //handle delete category
+
 
 
     //get all category
     const getAllCategory = async () => {
         try {
             const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/all-category`)
-            if (data.success) {
-                console.log(data.category)
-                setCategories(data.category);
+            if (data?.success) {
+                setCategories(data?.category);
             }
         } catch (error) {
             toast.error("something went wrong in getting category")
@@ -73,8 +72,8 @@ const CreateCategory = () => {
     }, [])
 
 
-    //delete handle
 
+    //handle delete category
     const handleDeleteSubmit = async (pId) => {
         try {
             const { data } = await axios.delete(`${process.env.REACT_APP_API}/api/v1/category/delete-category/${pId}`);
@@ -110,13 +109,13 @@ const CreateCategory = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {categories.map((c) => (
+                                    {categories?.map((c) => (
                                         <>
                                             <tr>
                                                 <td key={c._id}>{c.name}</td>
                                                 <td>
-                                                    <button className='btn btn-primary m-2' onClick={() => { setVisible(true); setUpdateName(c.name); setSelected(c) }}>Edit</button>
-                                                    <button className='btn btn-danger m-2' onClick={() => { handleDeleteSubmit(c._id) }}>Delete</button>
+                                                    <button className='btn btn-primary m-2' onClick={() => { setVisible(true); setUpdateName(c?.name); setSelected(c) }}>Edit</button>
+                                                    <button className='btn btn-danger m-2' onClick={() => { handleDeleteSubmit(c?._id) }}>Delete</button>
                                                 </td>
                                             </tr >
                                         </>
