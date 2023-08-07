@@ -29,7 +29,9 @@ const Login = () => {
                     token: res.data.token
                 })
                 localStorage.setItem('auth', JSON.stringify(res.data))
-                navigate(location.state || '/')
+                setTimeout(() => {
+                    navigate(location.state || '/')
+                }, 2000)
             } else {
                 toast.error(res.data.message)
             }

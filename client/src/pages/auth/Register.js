@@ -21,8 +21,11 @@ const Register = () => {
                 name, email, password, address, phone, answer
             });
             if (res && res.data.success) {
-                navigate('/login')
                 toast.success(res.data && res.data.message)
+                setTimeout(() => {
+
+                    navigate('/login')
+                }, 2000)
             } else {
                 toast.error(res.data.message)
             }

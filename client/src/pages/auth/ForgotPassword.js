@@ -20,7 +20,9 @@ const ForgotPassword = () => {
             });
             if (res && res.data.success) {
                 toast.success(res.data && res.data.message)
-                navigate('/login')
+                setTimeout(() => {
+                    navigate('/login')
+                }, 2000)
             } else {
                 toast.error(res.data.message)
             }

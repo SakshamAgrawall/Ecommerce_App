@@ -102,3 +102,11 @@
     height: 70vh;
     flex-direction: column;
   }
+
+  /* products css */
+
+
+  .product-link{
+    text-decoration: none !important ;
+    color: black !important;
+  }
