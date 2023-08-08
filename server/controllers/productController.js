@@ -230,3 +230,6 @@ export const searchProductController = async (req, res) => {
         })
     }
 }
+
+
+
