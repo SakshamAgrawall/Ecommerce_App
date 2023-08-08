@@ -2,6 +2,8 @@ import userModel from '../models/userModels.js'
 import { hashPassword, comparePassword } from '../helpers/authHelper.js'
 import JWT from 'jsonwebtoken';
 
+
+// registerController
 export const registerController = async (req, res) => {
     try {
         const { name, email, password, phone, address, answer } = req.body
@@ -55,6 +57,7 @@ export const registerController = async (req, res) => {
 }
 
 
+//loginController
 export const loginController = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -105,11 +108,14 @@ export const loginController = async (req, res) => {
     }
 }
 
+
+// testMiddleware
 export const testController = (req, res) => {
     res.send('protecte route')
 }
 
 
+// forgotPasswordController
 export const forgotPasswordController = async (req, res) => {
     try {
         const { email, answer, newPassword } = req.body

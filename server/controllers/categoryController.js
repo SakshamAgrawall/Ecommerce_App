@@ -1,6 +1,8 @@
 import categorySchema from "../models/categoryModel.js"
 import slugify from "slugify"
 
+
+// createCategoryController
 export const createCategoryController = async (req, res) => {
     try {
         const { name } = req.body
@@ -19,19 +21,22 @@ export const createCategoryController = async (req, res) => {
     }
 }
 
+
+// updateCategoryController
 export const updateCategoryController = async (req, res) => {
     try {
         const { name } = req.body
         const { id } = req.params
         const category = await categorySchema.findByIdAndUpdate(id, { name, slug: slugify(name) }, { new: true })
         res.status(201).send({ success: true, Message: "category updated", category })
-
     } catch (error) {
         console.log(error)
         res.status(500).send({ success: false, error, Message: 'error in updating category' })
     }
 }
 
+
+// getCategoryController
 export const getCategoryController = async (req, res) => {
     try {
         const category = await categorySchema.find({})
@@ -43,6 +48,7 @@ export const getCategoryController = async (req, res) => {
     }
 }
 
+// singleCategoryController
 export const singleCategoryController = async (req, res) => {
     try {
         const category = await categorySchema.findOne({ slug: req.params.slug })
@@ -55,6 +61,7 @@ export const singleCategoryController = async (req, res) => {
 }
 
 
+// deleteCategoryController
 export const deleteCategoryController = async (req, res) => {
     try {
         const { id } = req.params

@@ -211,3 +211,22 @@ export const productListController = async (req, res) => {
         })
     }
 }
+
+export const searchProductController = async (req, res) => {
+    try {
+        const { keyword } = req.params
+        const results = await productSchema.find({
+            $or: [
+                { name: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } },
+            ],
+        }).select('-photo')
+        res.json(results);
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error,
+            message: "error in search"
+        })
+    }
+}
