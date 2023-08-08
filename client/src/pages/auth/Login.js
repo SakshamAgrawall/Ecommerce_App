@@ -44,7 +44,7 @@ const Login = () => {
     return (
         <>
             <Layout title={"Login - Ecommerce App"}>
-                <div className='form-container'>
+                <div className='form-container' style={{ minHeight: "100vh" }}>
                     <form onSubmit={handleSumbit}>
                         <h4 className='title'>LOGIN NOW</h4>
                         <div className="mb-3">

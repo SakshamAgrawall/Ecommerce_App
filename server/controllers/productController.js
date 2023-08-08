@@ -43,7 +43,7 @@ export const createProductController = async (req, res) => {
 }
 export const allProductController = async (req, res) => {
     try {
-        const products = await productSchema.find({}).populate('category').select("-photo").limit(12).sort({ createdAt: -1 })
+        const products = await productSchema.find({}).populate('category').select("-photo").limit(20).sort({ createdAt: -1 })
         res.status(200).send({
             success: true,
             message: 'Product get succeefully',
@@ -152,6 +152,62 @@ export const updateProductController = async (req, res) => {
             success: false,
             error,
             message: "Error in updating product"
+        })
+    }
+}
+
+
+export const filtersProductController = async (req, res) => {
+    try {
+        const { checked, radio } = req.body
+        let args = {};
+        if (checked.length > 0) args.category = checked;
+        if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] }
+        const products = await productSchema.find(args)
+        res.status(200).send({
+            success: true,
+            products
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error,
+            message: "error in filters"
+        })
+    }
+}
+
+
+export const productCountController = async (req, res) => {
+    try {
+        const total = await productSchema.find({}).estimatedDocumentCount()
+        res.status(200).send({
+            success: true,
+            total
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error,
+            message: "error in count"
+        })
+    }
+}
+
+export const productListController = async (req, res) => {
+    try {
+        const perPage = 6;
+        const page = req.params.page ? req.params.page : 1
+        const products = await productSchema.find({}).select('-photo').skip((page - 1) * perPage).limit(perPage).sort({ createdAt: -1 })
+        res.status(200).send({
+            success: true,
+            products
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error,
+            message: "error in list"
         })
     }
 }

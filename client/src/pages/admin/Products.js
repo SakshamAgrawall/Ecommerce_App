@@ -28,28 +28,35 @@ const Products = () => {
     }, [])
     return (
         <Layout title={"Products - Ecommerce App"}>
-            <div className="row">
-                <div className="col-md-3">
-                    <AdminMenu />
-                </div>
+            <div className="container">
 
-                <div className="col-md-9">
-                    <h1 className='text-center'>All Products List</h1>
-                    <div className="d-flex">
-                        {
-                            Product?.map((p) => (
-                                <Link className='product-link' to={`/dashboard/admin/update-product/${p.slug}`} key={p._id}>
-                                    <div className="card m-2" style={{ width: '18rem' }} >
-                                        <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{p.name}</h5>
-                                            <p className="card-text">{p.description}</p>
-                                        </div>
-                                    </div>
-                                </Link>
+                <div className='container-fluid m-3 p-3'>
+                    <div className="row">
+                        <div className="col-md-3">
+                            <AdminMenu />
+                        </div>
 
-                            ))
-                        }
+                        <div className="col-md-9">
+                            <h1 className='text-center'>All Products List</h1>
+                            <div className="d-flex flex-wrap">
+                                {
+                                    Product?.map((p) => (
+                                        <Link className='product-link' to={`/dashboard/admin/update-product/${p.slug}`} key={p._id}>
+                                            <div className="card m-2" style={{ width: '18rem' }} >
+
+                                                <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+
+                                                <div className="card-body">
+                                                    <h5 className="card-title">{p.name}</h5>
+                                                    <p className="card-text">{p.description}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
+
+                                    ))
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
