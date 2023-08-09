@@ -1,6 +1,8 @@
 import productSchema from "../models/productModel.js";
 import fs from "fs"
 import slugify from "slugify"
+import categorySchema from "../models/categoryModel.js"
+
 
 export const createProductController = async (req, res) => {
     try {
@@ -231,5 +233,24 @@ export const searchProductController = async (req, res) => {
     }
 }
 
+
+//get product by cteogry
+export const categoryProductController = async (req, res) => {
+    try {
+        const category = await categorySchema.findOne({ slug: req.params.slug })
+        const products = await productSchema.find({ category }).select('-photo').populate('category');
+        res.status(200).send({
+            success: true,
+            category,
+            products
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error,
+            message: 'error in CP'
+        })
+    }
+}
 
 
