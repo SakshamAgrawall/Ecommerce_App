@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import { toast } from 'react-hot-toast'
@@ -43,6 +44,7 @@ const HomePage = () => {
   useEffect(() => {
     if (page === 1) return;
     loadMore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
   const loadMore = async () => {
     try {
