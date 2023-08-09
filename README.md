@@ -6,7 +6,7 @@ This is an MERN STACK Ecommerce Web Application that allows users to buy product
 #### backend is hosted on render web services
 - https://ecommerce-backend-04sc.onrender.com
 #### frontend is hosted on netlify web services
--
+- https://ecommerce-app-s.netlify.app/
 
 ## Framework /Dependencies
 
