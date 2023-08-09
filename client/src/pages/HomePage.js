@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 import axios from 'axios';
 import Prices from '../components/Prices'
 import { Checkbox, Radio } from 'antd'
-
+import { useCart } from '../context/cart'
 
 
 const HomePage = () => {
@@ -15,6 +15,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [cart, setCart] = useCart()
 
 
   //get total count
@@ -136,15 +137,15 @@ const HomePage = () => {
               <div className="d-flex flex-wrap">
                 {
                   products?.map((p) => (
-                    <div className="card m-2" style={{ width: '18rem' }} >
+                    <div className="card m-2" key={p._id} style={{ width: '18rem' }} >
 
-                      <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+                      <img className="card-img-top m-auto" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} style={{ width: "49%" }} />
                       <div className="card-body">
                         <h5 className="card-title">{p.name}</h5>
                         <p className="card-text">{p.description.substring(0, 30)}...</p>
                         <p className="card-text">RS.{p.price}</p>
 
-                        <button className='btn btn-secondary m-1'>ADD To CART</button>
+                        <button className='btn btn-secondary m-1' onClick={() => { setCart([...cart, p]); localStorage.setItem('cart', JSON.stringify([...cart, p])); toast.success('Added to Cart') }}>ADD To CART</button>
                       </div>
                     </div>
 
@@ -167,7 +168,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </Layout >
 
   )
 }

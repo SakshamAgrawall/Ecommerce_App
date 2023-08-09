@@ -44,7 +44,7 @@ const Products = () => {
                                         <Link className='product-link' to={`/dashboard/admin/update-product/${p.slug}`} key={p._id}>
                                             <div className="card m-2" style={{ width: '18rem' }} >
 
-                                                <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+                                                <img className="card-img-top m-auto" style={{ width: "49%" }} src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
 
                                                 <div className="card-body">
                                                     <h5 className="card-title">{p.name}</h5>
