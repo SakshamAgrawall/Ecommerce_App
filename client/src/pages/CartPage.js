@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import { useCart } from '../context/cart';
 import { useAuth } from '../context/auth';
 import { useNavigate } from 'react-router-dom';
+import DropIn from "braintree-web-drop-in-react";
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const CartPage = () => {
+    const [auth, setAuth] = useAuth()
     const [cart, setCart] = useCart()
-    const [auth] = useAuth()
+    const [clientToken, setClientToken] = useState('')
+    const [instance, setInstance] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
+
+    //remove itme
     const removeItem = (pid) => {
         try {
             let myCart = [...cart]
@@ -34,6 +43,50 @@ const CartPage = () => {
         }
     }
 
+
+
+    // get payment 
+    const getToken = async () => {
+        try {
+            const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/braintree/token`)
+            setClientToken(data?.clientToken);
+        } catch (error) {
+            console.log(error)
+
+        }
+    }
+
+    useEffect(() => {
+        getToken();
+    }, [auth?.token])
+
+    //payment
+    // const handlePayment = () => {
+
+    // }
+
+    const handlePayment = async () => {
+        try {
+            setLoading(true);
+            const { nonce } = await instance.requestPaymentMethod();
+            const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/product/braintree/payment`, {
+                nonce,
+                cart,
+            });
+            setLoading(false);
+            localStorage.removeItem("cart");
+            setCart([]);
+            toast.success("Payment Completed Successfully ");
+            setTimeout(() => {
+                navigate("/dashboard/user/orders");
+            }, 2000)
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    };
+
+
     return (
         <Layout title={'Cart'}>
             <div className="container">
@@ -49,7 +102,7 @@ const CartPage = () => {
                     <div className="col-md-6">
                         {
                             cart?.map(p => (
-                                <div className="row mb-2 p-3 card flex-row">
+                                <div className="row mb-2 p-3 card flex-row" key={cart._id}>
                                     <div className="col-md-4">
                                         <img className="card-img-top m-auto" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} style={{ width: '49%' }} />
 
@@ -57,7 +110,7 @@ const CartPage = () => {
                                     <div className="col-md-8">
                                         <p>{p.name}</p>
                                         <p>{p.description.substring(0, 30)}</p>
-                                        <p>Price : {p.price}</p>
+                                        <p>Price :Rs.{p.price}</p>
                                         <button className='btn btn-danger' onClick={() => removeItem(p._id)}>Remove Item</button>
                                     </div>
                                 </div>
@@ -71,7 +124,7 @@ const CartPage = () => {
                         <h4>Total :{totalPrice()} </h4>
                         {auth?.user?.address ? (
                             <>
-                                <div className="mb-3">
+                                <div className="mb-3" key={auth.user._id}>
                                     <h4>Current Address</h4>
                                     <h5>{auth?.user?.address}</h5>
                                     <button className='btn btn-outline-warning'
@@ -88,6 +141,31 @@ const CartPage = () => {
                                 }
                             </div>
                         )}
+                        <div className="mt-2">
+                            {!clientToken || !cart?.length ? (
+                                ""
+                            ) : (
+                                <>
+                                    <DropIn
+                                        options={{
+                                            authorization: clientToken,
+                                            paypal: {
+                                                flow: "vault",
+                                            },
+                                        }}
+                                        onInstance={(instance) => setInstance(instance)}
+                                    />
+
+                                    <button
+                                        className="btn btn-primary mb-3"
+                                        onClick={handlePayment}
+                                        disabled={loading || !instance || !auth?.user?.address}
+                                    >
+                                        {loading ? "Processing ...." : "Make Payment"}
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

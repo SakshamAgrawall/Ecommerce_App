@@ -36,7 +36,7 @@ const CategoryProduct = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{p.name}</h5>
                                     <p className="card-text">{p.description.substring(0, 30)}...</p>
-                                    <p className="card-text">RS.{p.price}</p>
+                                    <p className="card-text">Rs.{p.price}</p>
 
                                     <button className='btn btn-secondary m-1' onClick={() => { setCart([...cart, p]); localStorage.setItem('cart', JSON.stringify([...cart, p])); toast.success('Added to Cart') }}>ADD To CART</button>
                                 </div>
