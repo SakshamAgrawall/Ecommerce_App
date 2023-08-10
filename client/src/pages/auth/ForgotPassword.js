@@ -34,11 +34,11 @@ const ForgotPassword = () => {
     return (
         <Layout title={"ResetPassWord - Ecommerce App"}>
 
-            <div className='form-container' style={{ minHeight: "100vh" }}>
+            <div className='form-container'>
                 <form onSubmit={handleSumbit}>
-                    <h4 className='title'>Change PAssword</h4>
+                    <h4 className='title'>Change Password</h4>
                     <div className="mb-3">
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Your Email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter Your Email' className="form-control" id="exampleInputEmail1" />
                     </div>
                     <div className="mb-3">
                         <input type="text" className="form-control" required value={answer} onChange={(e) => setAnswer(e.target.value)} id="exampleInputName" placeholder='Enter your favorite color' />

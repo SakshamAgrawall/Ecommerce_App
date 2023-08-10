@@ -20,7 +20,7 @@ const Header = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div className="container-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
@@ -64,26 +64,29 @@ const Header = () => {
               </li>
                 <li className="nav-item">
                   <NavLink to="/login" className="nav-link">Login</NavLink>
-                </li></>) : (<li className="nav-item dropdown">
-                  <Link className="nav-link dropdown-toggle" data-bs-toggle="dropdown" >
+                </li></>) : (<><li className="nav-item dropdown">
+                  <NavLink className="nav-link dropdown-toggle" data-bs-toggle="dropdown" >
                     {auth?.user?.name}
-                  </Link>
+                  </NavLink>
                   <ul className="dropdown-menu">
                     <li><NavLink className="dropdown-item" to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : 'user'}`}>dashboard</NavLink></li>
                     <li><NavLink to="/login" className="dropdown-item" onClick={handleLogout}>Logout</NavLink></li>
                   </ul>
                 </li>
+                </>
               )
             }
             <li className="nav-item">
-              <Badge count={cart?.length} showZero offset={[-1, 10]} size='middle'>
-                <NavLink to="/cart" className="nav-link">Cart</NavLink>
-              </Badge>
+              <NavLink to="/cart" className="nav-link">
+                <Badge count={cart?.length} showZero offset={[10, -5]}>
+                  Cart
+                </Badge>
+              </NavLink>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }
 export default Header

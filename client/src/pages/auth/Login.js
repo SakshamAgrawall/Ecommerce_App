@@ -44,7 +44,7 @@ const Login = () => {
     return (
         <>
             <Layout title={"Login - Ecommerce App"}>
-                <div className='form-container' style={{ minHeight: "100vh" }}>
+                <div className='form-container' style={{ minHeight: "90vh" }}>
                     <form onSubmit={handleSumbit}>
                         <h4 className='title'>LOGIN NOW</h4>
                         <div className="mb-3">
@@ -54,7 +54,7 @@ const Login = () => {
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter Your Password' className="form-control" id="exampleInputPassword" />
                         </div>
                         <div className='mb-3'>
-                            <button type="button" onClick={() => { navigate('/forgot-password') }} className="btn btn-primary">Forgot Password</button>
+                            <button type="button" onClick={() => { navigate('/forgot-password') }} className="btn forgot-btn">Forgot Password</button>
                         </div>
                         <button type="submit" className="btn btn-primary">LogIn</button>
                     </form>
