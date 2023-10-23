@@ -9,6 +9,7 @@ import { useCart } from '../context/cart'
 import '../style/Homepage.css'
 
 
+
 const HomePage = () => {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
@@ -108,6 +109,18 @@ const HomePage = () => {
       filterProduct()
     }
   }, [checked, radio])
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center flex-column" style={{ height: '100vh', backgroundColor: 'black', color: 'white' }}>
+        <div className="spinner-grow text-white" style={{ width: '3rem', height: '3rem' }} role="status">
+          <span className="sr-only"></span>
+        </div>
+        <div className="mt-2">Please wait, we are doing some setup</div>
+      </div>
+    )
+  }
+
   return (
     <Layout title={"All Products - Best offers"}>
       <img
@@ -173,7 +186,6 @@ const HomePage = () => {
             )}
           </div>
         </div>
-
       </div>
     </Layout >
 
